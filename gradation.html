@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+      .text{
+        position: absolute;
+        top: 35%;
+        left: 15%;
+        background: linear-gradient(90deg, #ff0000,#ffff00,#ff00f3, #0033ff, #ff00c4, #ff0000);
+        background-size: 400%;
+        font-size: 100px;
+        font-family: sans-serif;
+        font-weight: 600;
+        word-spacing: 15px;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        animation: animate 10s linear infinite;
+      }
+      @keyframes animate {
+        0%{
+          background-position: 0%;
+        }
+        100%{
+          background-position: 400%;
+        }
+
+      }
+
+    </style>
+</head>
+<body>
+  <div class="text">
+    안녕하세요
+
+  </div>
+
+</body>
+</html>
