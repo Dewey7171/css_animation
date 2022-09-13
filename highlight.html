@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Highlight text on scroll</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+
+    <style>
+
+        .fade-text {
+            position: absolute;
+            top: 40px;
+            opacity: 0;
+            transition: top 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+
+        }
+        .fade-text-in {
+            transition: top 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+            top: 0px;
+            opacity: 1;
+        }
+
+        p.a {
+            font-size: 30px;
+            line-height: 45px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 800;
+        }
+
+        p.b {
+            font-size: 50px;
+            line-height: 45px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 900;
+        }
+
+        mark.a{
+            --color1: #C49DFFFC;
+            --color2: #C49DFFFC;
+            --height: 46%;
+            all: unset;
+            background-image: linear-gradient(var(--color1), var(--color2));
+            background-position: 0 120%;
+            background-repeat: no-repeat;
+            background-size: 0 var(--height);
+            animation: highlightTT 700ms 1 ease-out;
+            -webkit-animation-delay: 0.7s; /* Chrome, Safari, Opera */
+            animation-delay: 0.7s;
+            animation-fill-mode: forwards;
+            animation-play-state: paused;
+        }
+
+
+        @keyframes highlightTT {
+            to {
+                background-size: 100% var(--height);
+            }
+        }
+    </style>
+</head>
+
+<div class="contentWrapper">
+    <section class="fade-text">
+        <p class="a"><mark class="a">달리보라 모임</mark>은?</p>
+    </section>
+</div>
+
+<script>
+    const targets = document.querySelectorAll(".fade-text");
+    const options = { root: null, threshold: 0.1, rootMargin: "-0px" };
+    const observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach((entry) => {
+            const container = entry.target;
+            if (entry.isIntersecting) {
+                container.classList.add("fade-text-in");
+            } else {
+                container.classList.remove("fade-text-in");
+            }
+        });
+    }, options);
+
+    targets.forEach((target) => {
+        observer.observe(target);
+    });
+
+    (function (window, document) {
+        const markers = document.querySelectorAll('mark');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry) => {
+                if (entry.intersectionRatio > 0) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.8
+        });
+
+        markers.forEach(mark => {
+            observer.observe(mark);
+        });
+    })(window, document);
+
+
+</script>
