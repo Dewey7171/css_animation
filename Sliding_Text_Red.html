@@ -1,0 +1,150 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+
+
+    *{
+        box-sizing: border-box;
+    }
+
+    .container{
+        max-width: 1170px;
+        width: 100%;
+        margin:auto;
+    }
+
+    .home{
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-wrap: wrap;
+        padding:50px 15px;
+        position: relative;
+    }
+    .home::before{
+        content: '';
+        position: absolute;
+        left:0;
+        top:0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+        z-index: 1;
+    }
+
+    .home .home-text{
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .home .home-text h1{
+        color:#ffffff;
+        font-size: 50px;
+        color:#ffffff;
+        line-height: 56px;
+        font-weight: 700;
+        margin:0 0 20px;
+    }
+    .home .home-text p{
+        margin:0;
+        overflow: hidden;
+    }
+    .home .home-text p span{
+        font-size: 40px;
+        color:#ff2c45;
+        font-weight: 700;
+        display: inline-block;
+        line-height: 46px;
+        display: none;
+    }
+
+    .home .home-text p span.text-in{
+        display: block;
+        animation: textIn .5s ease;
+    }
+    .home .home-text p span.text-out{
+        animation: textOut .5s ease;
+    }
+    @keyframes textIn{
+        0%{
+            transform: translateY(100%);
+        }
+        100%{
+            transform: translateY(0%);
+        }
+    }
+    @keyframes textOut{
+        0%{
+            transform: translateY(0%);
+        }
+        100%{
+            transform: translateY(-100%);
+
+        }
+    }
+
+</style>
+<body>
+
+ 
+ <section class="home">
+     <div class="container">
+        <div class="row">
+            <div class="home-text">
+                 <h1>우리가 어떤 민족입니까?</h1>
+                 <p class="animate-text">
+                    <span>벡 의 민 족</span>
+                    <span>배달의 민족</span>
+                    <span>한 민 족</span>
+                    <span>아몰랑</span>
+                    <span>그러게요</span>
+                 </p>
+            </div>
+        </div>
+     </div>
+ </section>
+
+
+
+<script>
+         const txts=document.querySelector(".animate-text").children,
+               txtsLen=txts.length;
+           let index=0;
+          const textInTimer=3000,
+                textOutTimer=2800;
+
+         function animateText() {
+            for(let i=0; i<txtsLen; i++){
+              txts[i].classList.remove("text-in","text-out");  
+            }
+            txts[Sliding_Text_Red].classList.add("text-in");
+
+            setTimeout(function(){
+                txts[Sliding_Text_Red].classList.add("text-out");
+            },textOutTimer)
+
+            setTimeout(function(){
+
+              if(Sliding_Text_Red == txtsLen-1){
+                  Sliding_Text_Red=0;
+                }
+               else{
+                   Sliding_Text_Red++;
+                 }
+                animateText();
+            },textInTimer); 
+         }
+         
+         window.onload=animateText;
+   
+</script>
+</body>
+
+
+
+
+
